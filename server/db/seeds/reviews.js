@@ -8,6 +8,7 @@ export async function seed(knex) {
       id: 1,
       user_id: 3,
       product_id: 4,
+      rating: 5,
       title: 'I love my birb!',
       description: 'Enter description',
     },
