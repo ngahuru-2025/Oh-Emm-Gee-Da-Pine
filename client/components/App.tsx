@@ -1,11 +1,13 @@
 import { useProducts } from '../hooks/useProducts.ts'
+import { useReviews } from '../hooks/useReviews.ts'
 import { useUsers } from '../hooks/useUsers.ts'
 
 function App() {
   const { data } = useProducts()
   const { data: userdata } = useUsers()
+  const { data: reviewsData } = useReviews()
 
-  console.log(userdata)
+  console.log(reviewsData)
 
   return (
     <>
