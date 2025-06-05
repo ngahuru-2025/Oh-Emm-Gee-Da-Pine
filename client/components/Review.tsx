@@ -34,6 +34,7 @@ function Review() {
     const user = localStorage.getItem('username')
     setUsername(user)
   }, [])
+  
 
   if (isPending) {
     return <p>Loading...</p>
