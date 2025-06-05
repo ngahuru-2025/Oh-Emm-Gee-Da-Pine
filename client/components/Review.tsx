@@ -1,4 +1,4 @@
-import { useParams } from 'react-router'
+import { useParams, useNavigate } from 'react-router'
 import { useEffect, useState } from 'react'
 import { useReviewId } from '../hooks/useReviews'
 import { useUserId } from '../hooks/useUsers'
@@ -21,13 +21,14 @@ function Review() {
   const { data: reviewData, isPending } = useReviewId(Number(id))
   const [reviews, setReviews] = useState<Review[]>([])
   const [product, setProduct] = useState<Product | null>(null)
-
-  //  Track login
   const [username, setUsername] = useState<string | null>(null)
 
+
   //  Review
+
   const [rating, setRating] = useState(5)
   const [comment, setComment] = useState('')
+  const navigate = useNavigate()
 
   useEffect(() => {
     const user = localStorage.getItem('username')
@@ -72,8 +73,13 @@ function Review() {
       setReviews([...reviews, addedReview])
       setRating(5)
       setComment('')
-    }
+      // back to products page after submit 
+      // navigate('/products')
+  } else {
+    alert('Failed to submit review')
   }
+}
+    
 
   return (
     <div>
@@ -117,13 +123,21 @@ function Review() {
             />
           </label>
           <br />
-          <button type="submit">Submit Review</button>
+          {/* not working */}
+          <button type="submit">Submit Review </button>
+
         </form>
       ) : (
         <p>Please log in to leave a review.</p>
-      )}
+        
+      )} 
+      {/* working fine  */}
+      <button onClick={() => navigate('/products')}>⬅️ Back to Products</button>
     </div>
   )
 }
 
+
 export default Review
+
+
