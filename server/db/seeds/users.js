@@ -10,5 +10,11 @@ export async function seed(knex) {
       password: 'Testing',
       email: 'testEmail@gmail.com',
     },
+    {
+      user_id: 2,
+      username: 'ericsson',
+      password: 'testPaswwornd',
+      email: 'secondTestEmail@gmail.com',
+    },
   ])
 }
