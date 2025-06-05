@@ -1,6 +1,7 @@
 import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
 import { useReviewId } from '../hooks/useReviews'
+import { useUserId } from '../hooks/useUsers'
 
 type Review = {
   id: number
@@ -36,7 +37,6 @@ function Review() {
   if (isPending) {
     return <p>Loading...</p>
   }
-
   // product info
   // useEffect(() => {
   //   async function fetchProduct() {
@@ -78,7 +78,7 @@ function Review() {
   return (
     <div>
       <h2>Reviews for {product?.name}</h2>
-      {reviews.length === 0 && <p>No reviews yet.</p>}
+      {reviewData.length === 0 && <p>No reviews yet.</p>}
 
       <ul>
         {reviewData.map((review) => (
