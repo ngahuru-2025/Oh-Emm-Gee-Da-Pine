@@ -1,5 +1,6 @@
 import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
+import { useReviewId } from '../hooks/useReviews'
 
 type Review = {
   id: number
@@ -16,13 +17,14 @@ type Product = {
 
 function Review() {
   const { id } = useParams()
+  const { data: reviewData, isPending } = useReviewId(Number(id))
   const [reviews, setReviews] = useState<Review[]>([])
   const [product, setProduct] = useState<Product | null>(null)
 
   //  Track login
   const [username, setUsername] = useState<string | null>(null)
 
-  //  Review 
+  //  Review
   const [rating, setRating] = useState(5)
   const [comment, setComment] = useState('')
 
@@ -31,25 +33,21 @@ function Review() {
     setUsername(user)
   }, [])
 
+  if (isPending) {
+    return <p>Loading...</p>
+  }
+
   // product info
-  useEffect(() => {
-    async function fetchProduct() {
-      const res = await fetch(`/api/v1/products/${id}`)
-      const data = await res.json()
-      setProduct(data)
-    }
-    fetchProduct()
-  }, [id])
+  // useEffect(() => {
+  //   async function fetchProduct() {
+  //     const res = await fetch(`${rootURL}/products/${id}`)
+  //     const data = await res.json()
+  //     setProduct(data)
+  //   }
+  //   fetchProduct()
+  // }, [id])
 
   // reviews
-  useEffect(() => {
-    async function fetchReviews() {
-      const res = await fetch(`/api/v1/reviews/product/${id}`)
-      const data = await res.json()
-      setReviews(data)
-    }
-    fetchReviews()
-  }, [id])
 
   // Submit review
   async function handleSubmit(e: React.FormEvent) {
@@ -83,13 +81,12 @@ function Review() {
       {reviews.length === 0 && <p>No reviews yet.</p>}
 
       <ul>
-        {reviews.map((review) => (
+        {reviewData.map((review) => (
           <li key={review.id}>
-            🔹<strong>{review.user_name}</strong>
+            🔹<strong>{review.title}</strong>
+            <br />⭐ Rating: {review.rating}
             <br />
-            ⭐ Rating: {review.rating}
-            <br />
-            💬 {review.comment}
+            💬 {review.description}
             <hr />
           </li>
         ))}

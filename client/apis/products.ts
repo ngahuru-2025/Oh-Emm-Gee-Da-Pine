@@ -16,3 +16,8 @@ export async function getReviews() {
   const response = await request.get(`${rootURL}/reviews`)
   return response.body
 }
+
+export async function getReviewId(id: number) {
+  const response = await request.get(`${rootURL}/reviews/${id}`)
+  return response.body.result
+}
