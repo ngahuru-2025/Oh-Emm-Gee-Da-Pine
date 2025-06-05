@@ -6,3 +6,8 @@ export async function getProducts() {
   const response = await request.get(`${rootURL}/products`)
   return response.body
 }
+
+export async function getUsers() {
+  const response = await request.get(`${rootURL}/users`)
+  return response.body
+}

@@ -1,9 +1,11 @@
 import { useProducts } from '../hooks/useProducts.ts'
+import { useUsers } from '../hooks/useUsers.ts'
 
 function App() {
   const { data } = useProducts()
+  const { data: userdata } = useUsers()
 
-  console.log(data)
+  console.log(userdata)
 
   return (
     <>
