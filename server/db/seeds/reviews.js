@@ -12,5 +12,13 @@ export async function seed(knex) {
       title: 'I love my birb!',
       description: 'Enter description',
     },
+    {
+      id: 2,
+      user_id: 2,
+      product_id: 4,
+      rating: 4,
+      title: 'A test title',
+      description: 'Anbd A test description!',
+    },
   ])
 }
