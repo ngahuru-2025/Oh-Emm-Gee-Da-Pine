@@ -8,10 +8,15 @@ function App() {
   return (
     <>
       <div className="app">
-        <h1>Fullstack Boilerplate</h1>
-        <ul>
+        <h1 className="app-title">Fullstack Boilerplate</h1>
+        <ul className="product-list">
           {data &&
-            data.map((product) => <li key={product.name}>{product.name}</li>)}
+            data.map((product) => (
+              <li key={product.name} className="product-item">
+                <div className="product-image-placeholder"></div>
+                <span className="product-name">{product.name}</span>
+              </li>
+            ))}
         </ul>
       </div>
     </>
