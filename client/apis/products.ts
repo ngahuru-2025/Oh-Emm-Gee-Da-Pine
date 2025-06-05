@@ -11,3 +11,8 @@ export async function getUsers() {
   const response = await request.get(`${rootURL}/users`)
   return response.body
 }
+
+export async function getReviews() {
+  const response = await request.get(`${rootURL}/reviews`)
+  return response.body
+}
