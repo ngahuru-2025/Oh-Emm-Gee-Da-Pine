@@ -24,5 +24,20 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ message: 'Something went wrong' })
   }
 })
+router.post('/', async (req, res) => {
+  try {
+   const { user_name, rating, comment, product_id } = req.body
+   const newReview = await db.addReview({
+    user_name,
+    rating,
+    comment,
+    product_id})
+    res.json(newReview)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: 'Something went wrong' })
+  }
+})
+
 
 export default router
