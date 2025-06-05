@@ -19,15 +19,14 @@ function Review() {
   const [reviews, setReviews] = useState<Review[]>([])
   const [product, setProduct] = useState<Product | null>(null)
 
-  // New: Track login
+  //  Track login
   const [username, setUsername] = useState<string | null>(null)
 
-  // New: Review form states
+  //  Review 
   const [rating, setRating] = useState(5)
   const [comment, setComment] = useState('')
 
   useEffect(() => {
-    // Simulate logged-in user from localStorage
     const user = localStorage.getItem('username')
     setUsername(user)
   }, [])

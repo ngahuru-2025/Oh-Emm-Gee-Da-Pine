@@ -6,7 +6,7 @@ function App() {
   const { data: products } = useProducts()
   const { data: reviews } = useReviews()
   const { data: users } = useReviews()
-  
+
   function getReviewsForProduct(productId: number) {
     if (!reviews) return []
     return reviews.filter((review) => review.product_id === productId)
@@ -16,9 +16,9 @@ function App() {
     const productReviews = getReviewsForProduct(productId)
     if (productReviews.length === 0) return null
 
-    const total = productReviews.reduce((sum, review) => sum + review.rating, 0)
+    const total = productReviews.reduce((sum, review) => sum + review.rating, 0) // avarage star rate 
     const average = total / productReviews.length
-    return average.toFixed(1)
+    return average
   }
 
   return (
