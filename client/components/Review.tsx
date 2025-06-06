@@ -84,6 +84,16 @@ function Review() {
   return (
     <div>
       <h2>Reviews for {productData.name}</h2>
+      <img
+        src={productData.image_url}
+        alt={productData.name}
+        className="product-image-placeholder"
+        onError={(e) => {
+          ;(e.target as HTMLImageElement).src =
+            'https://placehold.co/100x100/A0A0A0/FFFFFF?text=No+Image'
+        }}
+      />
+      <p>{productData.description}</p>
       {reviewData.length === 0 && <p>No reviews yet.</p>}
 
       <ul>
