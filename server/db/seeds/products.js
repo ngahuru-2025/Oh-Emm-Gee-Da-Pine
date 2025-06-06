@@ -19,7 +19,7 @@ export async function seed(knex) {
         'Compact 75% layout, Gateron Brown switches, and RGB backlight.',
       price: 120,
       image_url:
-        'https://cdn.shopify.com/s/files/1/0059/0656/3943/products/Keychron-K2-Wireless-Mechanical-Keyboard-for-Mac-Windows-Linux-RGB-Backlight-Aluminum-Frame-Version-Typing-Angle_1200x.jpg',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBxr0WAjtLA5Xq0prAC5taQHW1wwAHIDY3qw&s',
     },
     {
       product_id: 3,
@@ -43,7 +43,7 @@ export async function seed(knex) {
         'A 1L bottle of the powerful original scent multi-surface cleaner. Cuts through grime and deodorizes.',
       price: 8,
       image_url:
-        'https://www.coles.com.au/content/dam/coles/coles-online/external/assets/product-images/60/6065506.jpeg',
+        'https://i5.walmartimages.com/seo/Pine-Sol-Multi-Surface-Cleaner-Original-48-fl-oz_7f7114f2-48f5-4821-b6f7-c39456e6edf3.d401e513608749389d1f187a1dd7ea5c.jpeg',
     },
   ])
 }
