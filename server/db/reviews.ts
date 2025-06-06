@@ -1,11 +1,10 @@
-import Review from '../../client/components/Review.tsx'
 import connection from './connection.ts'
 
-type newReview = { 
-user_name: string
-rating: number
-comment: string
-product_id: number
+type newReview = {
+  user_name: string
+  rating: number
+  description: string
+  product_id: number
 }
 
 export async function getAllReviews(db = connection) {
@@ -17,8 +16,12 @@ export async function getReviewById(id: number, db = connection) {
   return result
 }
 
-export async function addReview
-  (reviewData: newReview, db = connection) { 
-    const [id] = await db('reviews').insert(reviewData)
-    return {id, ...reviewData}
+export async function addReview(reviewData: newReview, db = connection) {
+  try {
+    const [result] = await db('reviews').insert(reviewData).returning('*')
+
+    return { id: result, ...reviewData }
+  } catch (error) {
+    console.error('Database error in addReview:', error)
+  }
 }

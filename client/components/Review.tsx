@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router'
 import { useEffect, useState } from 'react'
 import { useReviewId } from '../hooks/useReviews'
-import { useUserId } from '../hooks/useUsers'
+import request from 'superagent'
 
 type Review = {
   id: number
@@ -23,7 +23,6 @@ function Review() {
   const [product, setProduct] = useState<Product | null>(null)
   const [username, setUsername] = useState<string | null>(null)
 
-
   //  Review
 
   const [rating, setRating] = useState(5)
@@ -32,9 +31,8 @@ function Review() {
 
   useEffect(() => {
     const user = localStorage.getItem('username')
-    setUsername(user)
+    setUsername('Testing')
   }, [])
-  
 
   if (isPending) {
     return <p>Loading...</p>
@@ -57,31 +55,27 @@ function Review() {
     if (!username) return
 
     const newReview = {
-      user_name: username,
+      title: username,
+      description: comment,
       rating,
-      comment,
       product_id: Number(id),
     }
 
-    const res = await fetch('/api/v1/reviews', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newReview),
-    })
+    try {
+      const res = await request
+        .post('/api/v1/reviews')
+        .send(newReview)
+        .set('Accept', 'application/json')
 
-    if (res.ok) {
-      const addedReview = await res.json()
+      const addedReview = res.body
       setReviews([...reviews, addedReview])
       setRating(5)
       setComment('')
-      // back to products page after submit 
-      // navigate('/products')
-  } else {
-    alert('Failed to submit review')
+    } catch (error) {
+      console.error('Error submitting review:', error)
+      alert('Failed to submit review')
+    }
   }
-}
-    
-
   return (
     <div>
       <h2>Reviews for {product?.name}</h2>
@@ -126,19 +120,14 @@ function Review() {
           <br />
           {/* not working */}
           <button type="submit">Submit Review </button>
-
         </form>
       ) : (
         <p>Please log in to leave a review.</p>
-        
-      )} 
+      )}
       {/* working fine  */}
       <button onClick={() => navigate('/products')}>⬅️ Back to Products</button>
     </div>
   )
 }
 
-
 export default Review
-
-
