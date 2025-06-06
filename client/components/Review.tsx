@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useReviewId } from '../hooks/useReviews'
 import request from 'superagent'
 
+
 type Review = {
   id: number
   user_name: string
@@ -47,8 +48,8 @@ function Review() {
   //   fetchProduct()
   // }, [id])
 
-  // reviews
 
+  
   // Submit review
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
