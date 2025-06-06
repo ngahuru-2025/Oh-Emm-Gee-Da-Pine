@@ -59,11 +59,8 @@ html, body {
   border-radius: 8px;
   margin-right: 1.5rem;
   flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #888;
-  font-size: 0.8rem;
+  display: block;
+  object-fit: cover;
 }
 
 .product-name {

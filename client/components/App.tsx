@@ -1,8 +1,7 @@
 import { useProducts } from '../hooks/useProducts'
 import { useReviews } from '../hooks/useReviews'
 import { useUsers } from '../hooks/useUsers'
-import { Link } from 'react-router' 
-
+import { Link } from 'react-router'
 
 type Review = {
   id: number
@@ -12,10 +11,9 @@ type Review = {
   product_id: number
 }
 
-
 function App() {
   const { data: products } = useProducts()
-  const { data: reviews } = useReviews() as { data: Review}
+  const { data: reviews } = useReviews() as { data: Review }
   const { data: users } = useUsers()
 
   function getReviewsForProduct(productId: number) {
@@ -27,7 +25,10 @@ function App() {
     const productReviews = getReviewsForProduct(productId)
     if (productReviews.length === 0) return null
 
-    const total = productReviews.reduce((sum: number, review: Review) => sum + review.rating, 0) // avarage star rate 
+    const total = productReviews.reduce(
+      (sum: number, review: Review) => sum + review.rating,
+      0,
+    ) // avarage star rate
     const average = total / productReviews.length
     return average
   }
@@ -42,10 +43,21 @@ function App() {
 
           return (
             <li key={product.product_id} className="product-item">
-              <div className="product-image-placeholder"></div>
+              <img
+                src={product.image_url}
+                alt={product.name}
+                className="product-image-placeholder"
+                onError={(e) => {
+                  ;(e.target as HTMLImageElement).src =
+                    'https://placehold.co/100x100/A0A0A0/FFFFFF?text=No+Image'
+                }}
+              />
+
               <span className="product-name">{product.name}</span>
               {productReviews.length > 0 ? (
-                <p>⭐ {avg} ({productReviews.length} reviews)</p>
+                <p>
+                  ⭐ {avg} ({productReviews.length} reviews)
+                </p>
               ) : (
                 <p>No reviews yet</p>
               )}
