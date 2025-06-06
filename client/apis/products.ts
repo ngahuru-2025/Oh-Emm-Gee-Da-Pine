@@ -24,6 +24,10 @@ export async function getReviews() {
 
 export async function getReviewId(id: number) {
   const response = await request.get(`${rootURL}/reviews/${id}`)
-  console.log(response.body)
+  return response.body
+}
+
+export async function getProductById(id: number) {
+  const response = await request.get(`${rootURL}/products/${id}`)
   return response.body
 }
