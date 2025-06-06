@@ -4,13 +4,23 @@ import {
   useQueryClient,
   MutationFunction,
 } from '@tanstack/react-query'
-import { getProducts } from '../apis/products.ts'
+import { getProducts, getProductById } from '../apis/products.ts'
 
 export function useProducts() {
   const query = useQuery({ queryKey: ['products'], queryFn: getProducts })
   return {
     ...query,
     // Extra queries go here e.g. addFruit: useAddFruit()
+  }
+}
+
+export function useProductId(id: number) {
+  const query = useQuery({
+    queryKey: ['product', id],
+    queryFn: () => getProductById(id),
+  })
+  return {
+    ...query,
   }
 }
 

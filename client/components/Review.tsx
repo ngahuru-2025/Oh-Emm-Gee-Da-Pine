@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router'
 import { useEffect, useState } from 'react'
 import { useReviewId } from '../hooks/useReviews'
+import { useProductId } from '../hooks/useProducts'
 import request from 'superagent'
 
 type Review = {
@@ -19,6 +20,10 @@ type Product = {
 function Review() {
   const { id } = useParams()
   const { data: reviewData, isPending } = useReviewId(Number(id))
+  const { data: productData, isPending: productPending } = useProductId(
+    Number(id),
+  )
+  console.log(productData)
   const [reviews, setReviews] = useState<Review[]>([])
   const [product, setProduct] = useState<Product | null>(null)
   const [username, setUsername] = useState<string | null>(null)
@@ -34,7 +39,7 @@ function Review() {
     setUsername('Testing')
   }, [])
 
-  if (isPending) {
+  if (isPending || productPending) {
     return <p>Loading...</p>
   }
   // product info
@@ -78,7 +83,7 @@ function Review() {
   }
   return (
     <div>
-      <h2>Reviews for {product?.name}</h2>
+      <h2>Reviews for {productData.name}</h2>
       {reviewData.length === 0 && <p>No reviews yet.</p>}
 
       <ul>

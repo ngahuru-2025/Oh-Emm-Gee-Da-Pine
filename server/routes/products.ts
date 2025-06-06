@@ -15,4 +15,15 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/:id', async (req, res) => {
+  const { id } = req.params
+  try {
+    const result = await db.getProductById(Number(id))
+    res.json(result)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ message: 'Something went wrong' })
+  }
+})
+
 export default router
