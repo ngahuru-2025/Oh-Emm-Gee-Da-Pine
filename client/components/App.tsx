@@ -43,7 +43,16 @@ function App() {
 
           return (
             <li key={product.product_id} className="product-item">
-              <div className="product-image-placeholder"></div>
+              <img
+                src={product.image_url}
+                alt={product.name}
+                className="product-image-placeholder"
+                onError={(e) => {
+                  ;(e.target as HTMLImageElement).src =
+                    'https://placehold.co/100x100/A0A0A0/FFFFFF?text=No+Image'
+                }}
+              />
+
               <span className="product-name">{product.name}</span>
               {productReviews.length > 0 ? (
                 <p>
