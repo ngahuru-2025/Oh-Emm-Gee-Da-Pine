@@ -1,8 +1,7 @@
 import { useProducts } from '../hooks/useProducts'
 import { useReviews } from '../hooks/useReviews'
 import { useUsers } from '../hooks/useUsers'
-import { Link } from 'react-router' 
-
+import { Link } from 'react-router'
 
 type Review = {
   id: number
@@ -12,10 +11,9 @@ type Review = {
   product_id: number
 }
 
-
 function App() {
   const { data: products } = useProducts()
-  const { data: reviews } = useReviews() as { data: Review}
+  const { data: reviews } = useReviews() as { data: Review }
   const { data: users } = useUsers()
 
   function getReviewsForProduct(productId: number) {
@@ -27,9 +25,12 @@ function App() {
     const productReviews = getReviewsForProduct(productId)
     if (productReviews.length === 0) return null
 
-    const total = productReviews.reduce((sum: number, review: Review) => sum + review.rating, 0) // avarage star rate 
+    const total = productReviews.reduce(
+      (sum: number, review: Review) => sum + review.rating,
+      0,
+    ) // avarage star rate
     const average = total / productReviews.length
-    return average
+    return average.toFixed(1)
   }
 
   return (
@@ -45,7 +46,9 @@ function App() {
               <div className="product-image-placeholder"></div>
               <span className="product-name">{product.name}</span>
               {productReviews.length > 0 ? (
-                <p>⭐ {avg} ({productReviews.length} reviews)</p>
+                <p>
+                  ⭐ {avg} ({productReviews.length} reviews)
+                </p>
               ) : (
                 <p>No reviews yet</p>
               )}
